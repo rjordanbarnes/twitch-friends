@@ -1,9 +1,8 @@
 if (localStorage.getItem("streamers") === null) {
-	localStorage.setItem("streamers", ["TrumpSC", "TurtleKiddy"]);
+	var streamers = [];
+} else {
+  var streamers = localStorage.getItem("streamers").split(",");
 }
-
-var streamers = localStorage.getItem("streamers").split(",");
-var eventHandlersDisabled = true;
 
 var onlineStreamers = [];
 var offlineStreamers = [];
@@ -67,15 +66,13 @@ function buildFriendDiv(status, streamerData) {
 
 function buildApp() {
 	var streamersProcessed = 0;
+  updateFriendCount();
 
 	streamers.forEach(function(streamerName) {
     $.getJSON("https://api.twitch.tv/kraken/streams/" + streamerName + "?callback=?", function(streamerData) {
       // First sort the streamers into an Array of Online streamers and an Array of Offline streamers
       sortStreamer(streamerName, streamerData);
-      var totalFriends = onlineStreamers.length + offlineStreamers.length;
-      $(".friend-title").text(totalFriends + " FRIENDS");
-      $(".in-game-friend-count").text(onlineStreamers.length + " IN GAME");
-      $(".offline-friend-count").text(offlineStreamers.length + " OFFLINE");
+      updateFriendCount();
       streamersProcessed++;
       if (streamersProcessed === streamers.length) {
         // Then sort the arrays alphabetically and display them in the list.
@@ -98,41 +95,34 @@ var delay = (function(){
 
 function displayFriends() {
   // Get the streamer data and display it in the friends list.
-  var streamersProcessed = 0;
 
-  //////////////////////////////
-  // Need to change because onlineStreamers and offlineStreamers could be empty. Use For loop here instead of ForEach
-  /////////////////////////////
+  var onlineWaiting = onlineStreamers.length;
 
+  onlineStreamers.forEach(function(streamer) {
+    $.getJSON("https://api.twitch.tv/kraken/channels/" + streamer[0] + "?callback=?", function(streamerData) {
+      // Get streamer data.
+      onlineWaiting--;
+      streamer.push(buildFriendDiv("In-Game", streamerData));
 
-  onlineStreamers.forEach(function(streamerArray) {
-    $.getJSON("https://api.twitch.tv/kraken/channels/" + streamerArray[0] + "?callback=?", function(streamerData) {
-      // Get online streamer data and put it in the array.
-      streamerArray.push(buildFriendDiv("In-Game", streamerData));
-      streamersProcessed++;
+      if (onlineWaiting === 0) {
+        onlineStreamers.forEach(function(streamer) {
+        $(".online-friend-container").append(streamer[1]);
+        });
+      }
+    });
+  });
 
-      if (streamersProcessed === onlineStreamers.length) {
-        streamersProcessed = 0;
-        offlineStreamers.forEach(function(streamerArray) {
-          $.getJSON("https://api.twitch.tv/kraken/channels/" + streamerArray[0] + "?callback=?", function(streamerData) {
-            // Get offline streamer data.
-            streamerArray.push(buildFriendDiv("Offline", streamerData));
-            streamersProcessed++;
-            if (streamersProcessed === offlineStreamers.length) {
-              // Display everything once all streamer data has been converted into divs and placed into the arrays.
-              onlineStreamers.forEach(function(streamer) {
-                $(".online-friend-container").append(streamer[1]);
-              });
-              offlineStreamers.forEach(function(streamer) {
-                $(".offline-friend-container").append(streamer[1]);
-              });
-              // Enable handlers that rely on data.
-              if (eventHandlersDisabled){
-              	enableEventHandlers();
-              	eventHandlersDisabled = false;
-              }
-            }
-          });
+  var offlineWaiting = offlineStreamers.length;
+
+  offlineStreamers.forEach(function(streamer) {
+    $.getJSON("https://api.twitch.tv/kraken/channels/" + streamer[0] + "?callback=?", function(streamerData) {
+      // Get offline streamer data.
+      offlineWaiting--;
+      streamer.push(buildFriendDiv("Offline", streamerData));
+
+      if (offlineWaiting === 0) {
+        offlineStreamers.forEach(function(streamer) {
+        $(".offline-friend-container").append(streamer[1]);
         });
       }
     });
@@ -167,6 +157,9 @@ function enableEventHandlers() {
 	$(".friend-box").on('keypress', function(event) {
 		if (event.which === 13) {
 			addFriends($(this).val());
+      $(this).hide();
+      $(this).val("");
+      $(this).blur();
 		}
 	});
 }
@@ -217,8 +210,16 @@ function sortStreamer(streamerName, streamerData) {
   }
 }
 
+function updateFriendCount() {
+  var totalFriends = onlineStreamers.length + offlineStreamers.length;
+  $(".friend-title").text(totalFriends + " FRIENDS");
+  $(".in-game-friend-count").text(onlineStreamers.length + " IN GAME");
+  $(".offline-friend-count").text(offlineStreamers.length + " OFFLINE");
+}
+
 var main = function() {
 	buildApp();
+  enableEventHandlers();
 };
 
 $(document).ready(main);
