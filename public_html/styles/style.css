@@ -1,0 +1,154 @@
+body {
+	background-color: #282828;
+}
+
+
+/* Colors */
+
+.white {
+	color: white;
+}
+
+.in-game-color {
+	color: #81b900;
+}
+
+.border-in-game {
+	border: 1px solid #81b900;
+}
+
+.offline-color {
+	color: #8c8c8c;
+}
+
+.border-offline {
+	border: 1px solid #8c8c8c;
+}
+
+
+/* Program */
+
+input {
+	background-color: #4f4f4f;
+	border: none;
+}
+
+.window {
+	min-width: 220px;
+	padding: 0;
+	border: 1px solid black;
+	margin-top: 30px;
+}
+
+.title-bar {
+	background-color: #141414;
+	height: 40px;
+	padding: 7px 10px 0 10px;
+}
+
+.title-bar .fa-bars {
+	float: left;
+	font-size: 1.5em;
+	margin-top: 1px;
+}
+
+.friend-box {
+	display: none;
+	font-size: .85em;
+	margin-left: 125px;
+	width: 200px;
+	height: 24px;
+	padding: 0 16px;
+}
+
+.title-bar .fa-plus {
+	float: right;
+	font-size: 1.5em;
+	margin-top: 2px;
+	cursor: pointer;
+}
+
+.main-container {
+	background-color: #1a1a1a;
+	min-height: 170px;
+	max-height: 70vh;
+	overflow-y: auto;
+	padding: 0 0 0 25px;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+}
+
+.friend-status {
+	margin: 10px 0;
+}
+
+.friend-status span {
+	cursor: pointer;
+}
+
+.friend-title {
+	margin-right: 10px;
+}
+
+.in-game-friend-count {
+	margin-right: 5px;
+}
+
+.friend {
+	height: 52px;
+}
+
+.friend img {
+	margin: 3px 10px 0 0;
+	float: left;
+	height: 34px;
+	width: 34px;
+}
+
+.friend ul {
+	list-style-type: none;
+	font-size: .75em;
+	line-height: 13px;
+}
+
+.search-bar {
+	position: relative;
+	background-color: #141414;
+	height: 40px;
+	padding: 8px;
+	font-size: .85em;
+}
+
+.search-bar form {
+	height: 100%;
+}
+
+.search-bar input {
+	width: 100%;
+	height: 100%;
+	padding-left: 16px;
+}
+
+.search-bar .fa {
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 1.1em;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+	color: white;
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder { 
+	color: white;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder { 
+	color: white;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+	color: white;
+}

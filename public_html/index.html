@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Twitch Friends</title>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<link href="/styles/style.css" rel="stylesheet">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-4 col-md-offset-4 window">
+					<div class="title-bar white">
+						<i class="fa fa-bars"></i>
+						<input class="friend-box" type="text" placeholder="Separate names by commas" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Separate names by commas'">
+						<i class="fa fa-plus"></i>
+					</div>
+					<div class="main-container">
+						<div class="friend-status">
+							<span class="white friend-title"></span>
+							<span class="in-game-color in-game-friend-count"></span>
+							<span class="offline-color offline-friend-count"></span>
+						</div>
+						<div class="online-friend-container">
+						</div>
+						<div class="offline-friend-container">
+						</div>
+					</div>
+					<div class="search-bar white">
+						<form onsubmit="return false">
+						<input class="search-box" type="text" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'">
+						</form>
+						<i class="fa fa-search"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="/js/twitchfriends.js"></script>
+	</body>
+</html>
