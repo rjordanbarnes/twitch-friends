@@ -5,7 +5,7 @@
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-		<link href="/styles/style.css" rel="stylesheet">
+		<link href="styles/style.css" rel="stylesheet">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
@@ -14,8 +14,14 @@
 			<div class="row">
 				<div class="col-xs-12 col-md-4 col-md-offset-4 window">
 					<div class="title-bar white">
-						<i class="fa fa-bars"></i>
-						<input class="friend-box" type="text" placeholder="Separate names by commas" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Separate names by commas'">
+						<div class="dropdown">
+							<a data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="remove-friends">Remove Friends</a></li>
+							</ul>
+						</div>
+						<button class="btn btn-danger btn-xs remove-button">Remove</button>
+						<input class="friend-box" type="text" placeholder="Separate names by commas">
 						<i class="fa fa-plus"></i>
 					</div>
 					<div class="main-container">
@@ -39,6 +45,7 @@
 			</div>
 		</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="/js/twitchfriends.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="js/twitchfriends.js"></script>
 	</body>
 </html>

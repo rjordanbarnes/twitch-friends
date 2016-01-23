@@ -34,48 +34,100 @@ input {
 }
 
 .window {
+	display: flex;
+	flex-flow: column;
+	height: 100vh;
 	min-width: 220px;
 	padding: 0;
 	border: 1px solid black;
-	margin-top: 30px;
+	margin-top: 0;
+}
+
+@media (min-width: 768px) {
+	.window {
+		height: initial;
+		margin-top: 30px;
+	}
 }
 
 .title-bar {
 	background-color: #141414;
 	height: 40px;
-	padding: 7px 10px 0 10px;
 }
 
-.title-bar .fa-bars {
+.title-bar a {
+	color: white;
+}
+
+.dropdown {
+	position: absolute;
+	top: 0;
+	left: 10px;
+}
+
+.dropdown-menu {
+	top: 38px;
+	left: -11px;
+	border-radius: 0px;
+	background-color: #1a1a1a;
+}
+
+.dropdown-menu li a {
+	color: white;
+}
+
+.fa-bars {
 	float: left;
 	font-size: 1.5em;
-	margin-top: 1px;
+	margin-top: 8px;
+}
+
+.remove-button {
+	display: none;
+	position: absolute;
+	top: 8px;
+	left:40px;
 }
 
 .friend-box {
 	display: none;
+	position: absolute;
+	top: 7px;
+	right: 35px;
 	font-size: .85em;
-	margin-left: 125px;
-	width: 200px;
+	width: 190px;
 	height: 24px;
 	padding: 0 16px;
 }
 
-.title-bar .fa-plus {
+@media (min-width: 768px) {
+	.friend-box {
+		width: 200px;
+	}
+}
+
+.fa-plus {
 	float: right;
 	font-size: 1.5em;
-	margin-top: 2px;
+	margin-top: 9px;
+	margin-right: 10px;
 	cursor: pointer;
 }
 
 .main-container {
+	flex: 1 1 auto;
 	background-color: #1a1a1a;
 	min-height: 170px;
-	max-height: 70vh;
 	overflow-y: auto;
 	padding: 0 0 0 25px;
 	border-bottom: 1px solid black;
 	border-top: 1px solid black;
+}
+
+@media (min-width: 768px) {
+	.main-container {
+		max-height: 70vh;
+	}
 }
 
 .friend-status {
@@ -109,6 +161,13 @@ input {
 	list-style-type: none;
 	font-size: .75em;
 	line-height: 13px;
+}
+
+.friend .remove-checkbox {
+	display: none;
+	float: left;
+	margin-top: 13px;
+	margin-right: 5px;
 }
 
 .search-bar {
