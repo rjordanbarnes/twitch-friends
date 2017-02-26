@@ -1,6 +1,7 @@
 var streamers = [];
 var onlineStreamers = [];
 var offlineStreamers = [];
+var clientID = "5lc3lh50mnx7pl13q3mn53nkyr7wn0";
 
 if (localStorage.getItem("streamers") !== null) {
 	streamers = localStorage.getItem("streamers").split(",");
@@ -74,7 +75,7 @@ function buildApp() {
 	updateFriendCount();
 
 	streamers.forEach(streamerName => {
-		$.getJSON("https://api.twitch.tv/kraken/streams/" + streamerName + "?callback=?", streamerData => {
+		$.getJSON("https://api.twitch.tv/kraken/streams/" + streamerName + "?client_id=" + clientID, streamerData => {
 			// First sort the streamers into an Array of Online streamers and an Array of Offline streamers
 			sortStreamer(streamerName, streamerData);
 			updateFriendCount();
@@ -94,7 +95,7 @@ function displayFriends() {
 	var onlineWaiting = onlineStreamers.length;
 
 	onlineStreamers.forEach(streamer => {
-		$.getJSON("https://api.twitch.tv/kraken/channels/" + streamer[0] + "?callback=?", streamerData => {
+		$.getJSON("https://api.twitch.tv/kraken/channels/" + streamer[0] + "?client_id=" + clientID, streamerData => {
 			// Get streamer data.
 			onlineWaiting--;
 			streamer.push(buildFriendDiv("In-Game", streamerData));
@@ -110,7 +111,7 @@ function displayFriends() {
 	var offlineWaiting = offlineStreamers.length;
 
 	offlineStreamers.forEach(streamer => {
-		$.getJSON("https://api.twitch.tv/kraken/channels/" + streamer[0] + "?callback=?", function(streamerData) {
+		$.getJSON("https://api.twitch.tv/kraken/channels/" + streamer[0] + "?client_id=" + clientID, function(streamerData) {
 			// Get offline streamer data.
 			offlineWaiting--;
 			streamer.push(buildFriendDiv("Offline", streamerData));
